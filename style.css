@@ -11,4 +11,13 @@
   left: 50% !important;
   margin-left: -79px; }
 
+li {
+  cursor: pointer;
+  cursor: hand; }
+
+#timer-label {
+  padding: 20px;
+  border: 10px solid black;
+  font-size: 3em; }
+
 /*# sourceMappingURL=style.css.map */

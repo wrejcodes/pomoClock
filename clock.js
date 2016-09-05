@@ -36,11 +36,11 @@ var updateLabel = function(){
 		switch(timer.state){
 			case state.WORK : timer.secondsRemaining = timer.breakTime + 1;
 							  timer.state = state.REST;
-							  statusLabel.innerHTML = "Break";
+							  statusLabel.innerHTML = "Break Time Remaining";
 							  break;
 			case state.REST : timer.secondsRemaining = timer.workTime + 1;
 							  timer.state = state.WORK;
-							  statusLabel.innerHTML = "Work";
+							  statusLabel.innerHTML = "Work Time Remaining";
 							  break;
 		}
 	}
