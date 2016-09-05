@@ -1,4 +1,10 @@
 .current {
   color: black; }
 
+.text-center {
+  text-align: center; }
+
+.selected {
+  color: green; }
+
 /*# sourceMappingURL=style.css.map */

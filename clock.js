@@ -4,6 +4,7 @@ var startButton = document.getElementById("start");
 var play = document.getElementById("play");
 var pause = document.getElementById("pause");
 var resetButton = document.getElementById("reset");
+var regular = document.getElementById("default");
 
 var state = {
 	WORK:1,
@@ -19,6 +20,11 @@ var timer = {
 	ID: null
 };
 
+var options = {
+	"default" : 0,
+	"long" : 1,
+	"custom" :2
+};
 
 var updateLabel = function(){
 	if(timer.secondsRemaining == 0){
@@ -66,9 +72,46 @@ var reset = function(){
 	}
 };
 
+var clearSelected = function(){
+	regular.className = "";
+	long.className = "";
+	custom.className = "";
+};
+
+var defaultTime = function(){
+	timer.workTime = 25*60;
+	timer.breakTime = 5*60;
+	timer.secondsRemaining = 0;		
+	timer.state = timer.state ? state.REST : state.WORK;
+
+};
+
+var longTime = function(){
+	timer.workTime = 60*60;
+	timer.breakTime = 12*60;
+	timer.secondsRemaining = 0;
+	timer.state = timer.state ? state.REST : state.WORK;
+};
+
 startButton.addEventListener("click",startTimer,false);
-resetButton.addEventListener("click",reset,false)
+resetButton.addEventListener("click",reset,false);
 
 
 
+document.getElementById("options").addEventListener("click",function(e){
+	if(e.target && e.target.nodeName == "LI"){
+		clearSelected();
+		$(e.target).addClass("selected");
+		alert(options[e.target.id]);
+		switch(options[e.target.id]){
+			case options["default"] : defaultTime();
+									  break;
+			case options["long"] : longTime();
+									break;
+			case options["custom"] : customTime();
+									 break;
+		}
+		updateLabel();
+	}
+});
 
