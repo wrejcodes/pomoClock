@@ -5,7 +5,11 @@ var play = document.getElementById("play");
 var pause = document.getElementById("pause");
 var resetButton = document.getElementById("reset");
 var regular = document.getElementById("default");
+var long = document.getElementById("long");
+var custom = document.getElementById("custom");
 var saveChanges = document.getElementById("saveChanges");
+var dismiss = document.getElementById("dismiss");
+var close = document.getElementById("x-close");
 
 var state = {
 	WORK:1,
@@ -23,7 +27,8 @@ var timer = {
 
 var options = {
 	"default" : 0,
-	"long" : 1
+	"long" : 1,
+	"custom": 2
 };
 
 var updateLabel = function(){
@@ -80,10 +85,12 @@ var clearSelected = function(){
 
 var defaultTime = function(){
 	setTimes(25,5);
+	timer.previousOption = options["default"];
 };
 
 var longTime = function(){
 	setTimes(60,12);
+	timer.previousOption = options["long"]
 };
 
 var setTimes = function(newWork, newBreak){
@@ -101,12 +108,30 @@ var save = function(){
 	} else {
 		setTimes(customWork,customBreak);
 		$('#customTime').modal('hide');
+		timer.previousOption = options['custom'];
 	}
 };
+
+var discard = function(){
+	clearSelected();
+	switch(timer.previousOption){
+		case options['default'] : regular.className = "selected";
+								  break;
+		case options['long'] : long.className = "selected";
+							   break;
+		case options['custom'] : custom.className = "selected";
+								 break;
+		default : regular.className = "selected";
+				  break;
+	}
+	$('#customTime').modal('hide');
+}
 
 startButton.addEventListener("click",startTimer,false);
 resetButton.addEventListener("click",reset,false);
 saveChanges.addEventListener("click",save,false);
+dismiss.addEventListener("click",discard,false);
+close.addEventListener("click",discard,false);
 
 
 

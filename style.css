@@ -7,4 +7,8 @@
 .selected {
   color: green; }
 
+.dropdown-menu {
+  left: 50% !important;
+  margin-left: -79px; }
+
 /*# sourceMappingURL=style.css.map */
