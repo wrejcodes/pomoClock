@@ -3,6 +3,7 @@ var statusLabel = document.getElementById("status-label");
 var startButton = document.getElementById("start");
 var play = document.getElementById("play");
 var pause = document.getElementById("pause");
+var resetButton = document.getElementById("reset");
 
 var state = {
 	WORK:1,
@@ -54,7 +55,19 @@ var startTimer = function(){
 	}
 };
 
+var reset = function(){
+	switch(timer.state){
+		case state.WORK : timer.secondsRemaining = timer.workTime + 1;
+						  updateLabel();
+						  break;
+		case state.REST : timer.secondsRemaining = timer.breakTime + 1;
+						  updateLabel();
+						  break;
+	}
+};
+
 startButton.addEventListener("click",startTimer,false);
+resetButton.addEventListener("click",reset,false)
 
 
 
