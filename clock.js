@@ -5,6 +5,7 @@ var play = document.getElementById("play");
 var pause = document.getElementById("pause");
 var resetButton = document.getElementById("reset");
 var regular = document.getElementById("default");
+var saveChanges = document.getElementById("saveChanges");
 
 var state = {
 	WORK:1,
@@ -78,37 +79,47 @@ var clearSelected = function(){
 };
 
 var defaultTime = function(){
-	timer.workTime = 25*60;
-	timer.breakTime = 5*60;
-	timer.secondsRemaining = 0;		
-	timer.state = timer.state ? state.REST : state.WORK;
-
+	setTimes(25,5);
 };
 
 var longTime = function(){
-	timer.workTime = 60*60;
-	timer.breakTime = 12*60;
+	setTimes(60,12);
+};
+
+var setTimes = function(newWork, newBreak){
+	timer.workTime = newWork*60;
+	timer.breakTime = newBreak*60;
 	timer.secondsRemaining = 0;
 	timer.state = timer.state ? state.REST : state.WORK;
+	updateLabel();
+}
+var save = function(){
+	var customWork = document.getElementById("work-minutes").value;
+	var customBreak = document.getElementById("break-minutes").value;
+	if(!customWork || !customBreak){
+		alert("You must input a value!");
+	} else {
+		setTimes(customWork,customBreak);
+		$('#customTime').modal('hide');
+	}
 };
 
 startButton.addEventListener("click",startTimer,false);
 resetButton.addEventListener("click",reset,false);
+saveChanges.addEventListener("click",save,false);
 
 
 
 document.getElementById("options").addEventListener("click",function(e){
 	if(e.target && e.target.nodeName == "LI"){
 		clearSelected();
-		$(e.target).addClass("selected");
-		alert(options[e.target.id]);
+		$(e.target).addClass("selected"); 
 		switch(options[e.target.id]){
 			case options["default"] : defaultTime();
 									  break;
 			case options["long"] : longTime();
 									break;
 		}
-		updateLabel();
 	}
 });
 
