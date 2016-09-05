@@ -1,7 +1,8 @@
 var screenText = document.getElementById("timer-label");
 var statusLabel = document.getElementById("status-label");
 var startButton = document.getElementById("start");
-
+var play = document.getElementById("play");
+var pause = document.getElementById("pause");
 
 var state = {
 	WORK:1,
@@ -43,9 +44,13 @@ var startTimer = function(){
 	if(!timer.running){
 		timer.ID = window.setInterval(updateLabel,1000);
 		timer.running = true;
+		pause.className = "fa fa-pause";
+		play.className = "fa fa-play current";
 	} else {
 		clearTimeout(timer.ID);
 		timer.running = false;
+		play.className = "fa fa-play";
+		pause.className = "fa fa-pause current";
 	}
 };
 
