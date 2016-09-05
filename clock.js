@@ -22,8 +22,7 @@ var timer = {
 
 var options = {
 	"default" : 0,
-	"long" : 1,
-	"custom" :2
+	"long" : 1
 };
 
 var updateLabel = function(){
@@ -108,8 +107,6 @@ document.getElementById("options").addEventListener("click",function(e){
 									  break;
 			case options["long"] : longTime();
 									break;
-			case options["custom"] : customTime();
-									 break;
 		}
 		updateLabel();
 	}
